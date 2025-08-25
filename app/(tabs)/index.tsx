@@ -6,6 +6,7 @@ import SearchBar from "@/Components/SearchBar";
 import {useContext} from "react";
 import useFetch from "@/services/useFetch";
 import {fetchMovies} from "@/services/api";
+import MovieCard from "@/Components/MovieCard";
 
 export default function Index() {
 
@@ -42,12 +43,25 @@ export default function Index() {
                                 placeholder="Search for a Movie"
                             />
                             <>
+                                <Text className="text-lg text-white font-bold mb-3">Latest Movies </Text>
 
                                 <FlatList
                                     data={movies}
-                                    renderItem={({item})=>(
-                                        <Text>{item.title}</Text>
+                                    className="mt-3 pb-32"
+                                    renderItem={({item}:any)=>(
+                                        <MovieCard
+                                            {...item}
+                                        />
                                     )}
+                                    keyExtractor={(item)=>item.id.toString()}
+                                    numColumns={3}
+                                    columnWrapperStyle={{
+                                        justifyContent:'flex-start',
+                                        gap:20,
+                                        paddingRight:5,
+                                        marginBottom:10,
+                                    }}
+                                    scrollEnabled={false}
                                 />
                             </>
                         </View>
